@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  console.log(navigate); //오류 방지용
 
   const handleSubmit = async (e) => {
     e.preventDefault();

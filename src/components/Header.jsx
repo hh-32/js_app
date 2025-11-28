@@ -9,6 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Header() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  
   return (
     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 2 }}>
       <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
