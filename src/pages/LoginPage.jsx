@@ -9,13 +9,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const navigate = useNavigate();
-  console.log(navigate); //오류 방지용
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ studentId, password });
-      // navigate handled in login()
+      navigate("/home");
     } catch (error) {
       setErr(error.message || "로그인 실패");
     }
@@ -23,7 +22,6 @@ export default function LoginPage() {
 
   return (
     <Box sx={{ maxWidth: 420, mx: "auto", mt: 8, p: 3 }}>
-      {/* 로고 */}
       <Box sx={{ textAlign: "center", mb: 3 }}>
         <img src="/logo.png" alt="Sangmyung" style={{ height: 84 }} />
       </Box>

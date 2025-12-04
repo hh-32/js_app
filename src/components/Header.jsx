@@ -9,7 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Header() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   return (
     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 2 }}>
       <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
@@ -17,13 +17,13 @@ export default function Header() {
       </Typography>
 
       <Box>
-        <IconButton onClick={() => navigate("/notifications")}>
+        <IconButton onClick={() => navigate("/notifications")} aria-label="notifications">
           <NotificationsIcon />
         </IconButton>
-        <IconButton onClick={() => navigate("/chat")}>
+        <IconButton onClick={() => navigate("/chat")} aria-label="chat">
           <ChatIcon />
         </IconButton>
-        <IconButton onClick={() => navigate("/profile")}>
+        <IconButton onClick={() => navigate("/profile")} aria-label="profile">
           <AccountCircleIcon />
         </IconButton>
       </Box>

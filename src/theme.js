@@ -7,9 +7,9 @@ const SM_DARK_GRAY = "#333B3D";
 const theme = createTheme({
   palette: {
     primary: { main: SM_BLUE },
-    background: { default: "#fff" },
-    smGray: { main: SM_LIGHT_GRAY },
+    background: { default: "#ffffff" },
     text: { primary: SM_DARK_GRAY },
+    neutral: { main: SM_LIGHT_GRAY },
   },
   typography: {
     fontFamily: '"Noto Sans KR", "Roboto", "Helvetica", "Arial", sans-serif',

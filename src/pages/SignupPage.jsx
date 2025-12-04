@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Box, TextField, Button, Typography, MenuItem } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   const { signup } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", birthYear: "", gender: "", studentId: "", password: "", email: "" });
   const [err, setErr] = useState("");
 
@@ -13,6 +15,7 @@ export default function SignupPage() {
     e.preventDefault();
     try {
       await signup(form);
+      navigate("/home");
     } catch (error) {
       setErr(error.message || "회원가입 실패");
     }

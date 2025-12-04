@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import api from "../api/api";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -13,7 +12,6 @@ export function AuthProvider({ children }) {
     }
   });
   const [token, setToken] = useState(() => localStorage.getItem("token") || null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -24,23 +22,25 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   const login = async ({ studentId, password }) => {
-    // 실제: POST /auth/login
-    // 더미 동작: accept any non-empty
     if (!studentId || !password) throw new Error("학번/비밀번호 필요");
-    // 실제 응답 모의
+
+    // 더미 로그인 (실제 연동 시 api.post('/auth/login',...) 사용)
     const mockUser = { id: 1, name: "홍길동", studentId, nickname: "길동" };
     const mockToken = "mock-jwt-token";
+
     localStorage.setItem("user", JSON.stringify(mockUser));
     localStorage.setItem("token", mockToken);
+
     setUser(mockUser);
     setToken(mockToken);
-    navigate("/home");
+
+    return true; // 호출한 컴포넌트가 navigate 수행
   };
 
   const signup = async (payload) => {
-    // 실제: POST /auth/signup
-    // 여기서는 바로 로그인 처리
+    // 실제: call backend signup; 여기서는 바로 login 호출
     await login({ studentId: payload.studentId, password: payload.password });
+    return true;
   };
 
   const logout = () => {
@@ -48,7 +48,6 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("token");
     setUser(null);
     setToken(null);
-    navigate("/");
   };
 
   const updateProfile = (partial) => {

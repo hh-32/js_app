@@ -2,7 +2,6 @@ import React from "react";
 import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
 
 export default function NotificationsPage() {
-  // 임시 알림 데이터
   const notifications = [
     { id: 1, text: "김OO님이 당신에게 좋아요를 보냈습니다.", type: "like" },
     { id: 2, text: "채팅: 안녕하세요?", type: "chat" },

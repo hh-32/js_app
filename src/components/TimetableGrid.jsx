@@ -3,7 +3,6 @@ import { Box, Paper, Typography, Grid } from "@mui/material";
 import CourseCard from "./CourseCard";
 
 export default function TimetableGrid({ courses = [], onCourseClick }) {
-  // 단순한 목록 기반 표시 (후에 그리드로 확장)
   return (
     <Box>
       <Typography variant="h6" sx={{ mb: 1 }}>
