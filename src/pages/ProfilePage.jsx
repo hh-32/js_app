@@ -9,20 +9,37 @@ export default function ProfilePage() {
 
   const save = () => {
     updateProfile({ nickname, intro });
-    alert("저장되었습니다.");
+    alert("프로필이 수정되었습니다.");
   };
 
   return (
     <Box sx={{ maxWidth: 720, mx: "auto", mt: 4 }}>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        {user?.name}님, 프로필
+        프로필 설정
       </Typography>
 
       <Box sx={{ display: "flex", gap: 2 }}>
-        <Avatar sx={{ width: 120, height: 120 }}>{user?.name?.[0]}</Avatar>
+        <Avatar sx={{ width: 120, height: 120 }}>
+          {nickname?.[0] || user?.name?.[0]}
+        </Avatar>
+
         <Box sx={{ flex: 1 }}>
-          <TextField label="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} fullWidth sx={{ mb: 2 }} />
-          <TextField label="자기소개" value={intro} onChange={(e) => setIntro(e.target.value)} fullWidth multiline rows={4} sx={{ mb: 2 }} />
+          <TextField
+            label="닉네임"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="자기소개"
+            value={intro}
+            onChange={(e) => setIntro(e.target.value)}
+            fullWidth
+            multiline
+            rows={4}
+            sx={{ mb: 2 }}
+          />
           <Button variant="contained" onClick={save}>
             저장
           </Button>

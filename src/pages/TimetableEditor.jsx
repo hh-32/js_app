@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, List, ListItem, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -9,9 +9,22 @@ export default function TimetableEditor() {
   const [day, setDay] = useState("");
   const [time, setTime] = useState("");
 
+  // 📌 기존에 저장된 시간표 불러오기
+  useEffect(() => {
+    const saved = localStorage.getItem("courses");
+    if (saved) {
+      setCourses(JSON.parse(saved));
+    }
+  }, []);
+
   const addCourse = () => {
     if (!name) return;
-    setCourses((s) => [...s, { id: Date.now(), name, day, time }]);
+    const newList = [...courses, { id: Date.now(), name, day, time }];
+    setCourses(newList);
+
+    // 📌 localStorage 저장
+    localStorage.setItem("courses", JSON.stringify(newList));
+
     setName("");
     setDay("");
     setTime("");

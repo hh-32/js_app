@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import Header from "../components/Header";
 import TimetableGrid from "../components/TimetableGrid";
@@ -10,13 +10,17 @@ export default function HomePage() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line
-  const [courses, setCourses] = useState([
-    { id: 1, name: "데이터베이스", day: "월", time: "09:00-10:30" },
-    { id: 2, name: "운영체제", day: "화", time: "11:00-12:30" },
-  ]);
+  const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [openMatch, setOpenMatch] = useState(false);
+
+  // 📌 localStorage에서 시간표 불러오기
+  useEffect(() => {
+    const saved = localStorage.getItem("courses");
+    if (saved) {
+      setCourses(JSON.parse(saved));
+    }
+  }, []);
 
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
@@ -40,7 +44,12 @@ export default function HomePage() {
 
       <TimetableGrid courses={courses} onCourseClick={handleCourseClick} />
 
-      <MatchModal open={openMatch} onClose={() => setOpenMatch(false)} course={selectedCourse} onLike={handleLike} />
+      <MatchModal
+        open={openMatch}
+        onClose={() => setOpenMatch(false)}
+        course={selectedCourse}
+        onLike={handleLike}
+      />
     </Box>
   );
 }
